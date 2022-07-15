@@ -47,13 +47,13 @@ int main() {
 				cout << "99- TOP MENU\n";
 				cout << "YOUR CHOICE: ";
 				cin >> choiceFIRST;
-				//------------------------------------1 in icindeki 1 giris-------------
+				
 				if (choiceFIRST == "1") {
-					string control;			//işlem sonunda devam edilip edilmeyeceği sorulurken kullanılan değişken.
+					string control;			
 					do {
 						system("cls");
 						string keep;
-						int controlx = 0, control2x = 0;  //oda numaraları daha önce kullanılmış mı ve nizami mi diye kontrol ederken kullanılan yardımcı değişken.
+						int controlx = 0, control2x = 0;  
 						do {
 							controlx = 0, control2x = 0;
 							ReadFile.open("roomRegistration.txt");
@@ -63,38 +63,38 @@ int main() {
 							while (ReadFile >> ROOM.roomNo >> ROOM.price) {
 
 								if (keep == ROOM.roomNo)
-									controlx = 1;         //eğer oda numarası daha öncee kullanılmışsa değişkene 1 değeri atanıyor.
+									controlx = 1;        
 							}
 							ReadFile.close();
 							for (int i = 0; i < keep.length(); i++) {
 								if (!(keep[i] > 47 && keep[i] < 58))
-									control2x = 1;       //eğer oda numarasına rakamdandan başka birşey yazıldıysa kontrol2x değişkenine 1 atanıyor.
+									control2x = 1;       
 							}
 							if (controlx == 1) {
 								system("cls");
-								cout << "THIS ROOM NUMBER IS USED. CHOOSE ANOTHER NUMBER...\n";				//kontrolx değişkenine 1 atanmışsa kullanıcıya uyarı yapılıyor.
+								cout << "THIS ROOM NUMBER IS USED. CHOOSE ANOTHER NUMBER...\n";				
 								system("pause");
 								system("cls");
 							}
 							else if (control2x == 1) {
 								system("cls");
-								cout << "THE ROOM NUMBER MUST CONSIST OF NUMBERS...\n";						//kontrol2x değişkenine 1 atanmışsa kullanıcıya uyarı yapılıyor.
+								cout << "THE ROOM NUMBER MUST CONSIST OF NUMBERS...\n";						
 								system("pause");
 								system("cls");
 							}
 							else if (keep.length() != 4) {
 								system("cls");
-								cout << "ROOM NUMBER MUST BE 4 DIGITS...\n";			//oda numarası 4 haneden fazla ise kullanıcıya uyarı yapılıyor.
+								cout << "ROOM NUMBER MUST BE 4 DIGITS...\n";			
 								system("pause");
 								system("cls");
 							}
 
-						} while (controlx == 1 || control2x == 1 || keep.length() != 4);		//yukarıdaki uyarılardan en az biri bile yapıldıysa tekrardan numara girmesi isteniyor.
+						} while (controlx == 1 || control2x == 1 || keep.length() != 4);	
 						controlx = 0, control2x = 0;
-						int control4x;		//eğer harf harici bir karakter kullanılmışsa kullanıcıyı uyarmak için kullanılacak değişken.
-						string uctut; //oda ucreti girilirken rakam harici bir karakter kullanılmış mı diye kontrol etmek icin kullanılan değişken.
+						int control4x;		
+						string uctut; 
 						do {
-							control4x = 0;				//kontrol4x değişkenine random olarak 0 atanır.
+							control4x = 0;				
 							cout << "ENTER ROOM PRICE: ";
 							cin >> ROOM.price;
 							uctut = ROOM.price;
@@ -104,15 +104,15 @@ int main() {
 								li = uctut[i];
 								nn = static_cast<int>(li);
 								if (!((nn > 47) && (nn < 58)))
-									control4x = 1;				//eğer rakam harici bir karakter kullanılmışsa kontrol4x değişkenine 1 atanır.
+									control4x = 1;				
 							}
 							if (control4x == 1) {
 								system("cls");
-								cout << "ONLY NUMBERS CAN BE ENTERED IN THE PRICE FIELD ...\n";			//eğer kontrol4x değişkenine 1 atanmışsa uyarı verir.
+								cout << "ONLY NUMBERS CAN BE ENTERED IN THE PRICE FIELD ...\n";			
 								system("pause");
 								system("cls");
 							}
-						} while (control4x == 1);	//kontrol4x değişkeni 1 ise uyarıdan sonra yeniden ücret girilmesi istenir.
+						} while (control4x == 1);	
 
 						WriteFile.open("roomRegistration.txt", ios::app);
 						WriteFile << keep << "\t" << ROOM.price << endl;
@@ -133,12 +133,11 @@ int main() {
 					} while (control == "y");
 
 				}
-				//-----------------------------1 icindeki 2 giris-------------------
 				else if (choiceFIRST == "2") {
 
 					string choice1;
-					int  nul;		//oda silerken silinecek odanın olup olmadığını söylemek için kullanılan değişken.
-					string no;		//girilen oda numarasının olup olmadığını kontrol ederken kullanılan değişken.
+					int  nul;		
+					string no;		
 					do {
 						do {
 							nul = 0;
@@ -148,18 +147,17 @@ int main() {
 							ReadFile.open("roomRegistration.txt");
 							while (ReadFile >> ROOM.roomNo >> ROOM.price) {
 								if (no == ROOM.roomNo)
-									nul = 1;							//böyel bir numara varsa nul değişkenine 1 atanır.
+									nul = 1;							
 							}
 							ReadFile.close();
 							if (nul == 0) {
 								system("cls");
-								cout << "THERE IS NO ROOM WITH THIS NUMBER.\n";    // böyle bir numara yoksa nul değişkeni varsayılan olarak sıfır olur ve uyarı verir.
+								cout << "THERE IS NO ROOM WITH THIS NUMBER.\n";    
 								system("pause");
 							}
-						} while (nul == 0);  //girilen oda numarası yoksa yeniden numara ister.
+						} while (nul == 0); 
 
-											 //---------------------------------------------------------------------------------
-						WriteFile.open("rezervKeep.txt");                                               //eğer silinen odanın rezervasyonu varsa onu da siler.
+						WriteFile.open("rezervKeep.txt");                                               
 						ReadFile.open("rezerv.txt");
 						while (ReadFile >> ROOM.roomNo >> cl.clientNumber >> cl.name) {
 							if (ROOM.roomNo != no)
@@ -176,7 +174,6 @@ int main() {
 						ReadFile.close();
 						WriteFile.close();
 
-						//---------------------------------------------------------------------------------
 						WriteFile.open("roomRegistrationKeep.txt");
 						ReadFile.open("roomRegistration.txt");
 						while (ReadFile >> ROOM.roomNo >> ROOM.price) {
@@ -237,13 +234,9 @@ int main() {
 			} while (choiceFIRST != "99");
 
 		}
-		//------------------------------------------------------------------------ANA_MENU_1.SECENEK_CIKIS--------------------------------------
-
-
-		//------------------------------------------------------------------------ANA_MENU_2.SECENEK_GIRIS-------------------------------------
 
 		if (choice == "2") {
-			string choiceFIRST;   //menü seçimde kullanılacak değişken.
+			string choiceFIRST;   
 			do {
 				system("cls");
 				cout << "CLIENT PROCESS\n";
@@ -256,11 +249,10 @@ int main() {
 				cout << "99- TOP MENU\n";
 				cout << "YOUR CHOICE: ";
 				cin >> choiceFIRST;
-				//------------------------------------2 nin icindeki 1 giris-------------
 				if (choiceFIRST == "1") {
 					string control;
 					string a;
-					int pl; //ad ve soyadda rakam ve kullanılamayan karakterilerin kontrolü için oluşturulan değişken.
+					int pl; 
 					do {
 
 						system("cls");
@@ -301,9 +293,9 @@ int main() {
 								system("cls");
 							}
 						} while (pl == 1);
-						int u = 0, olo = 0;  //tc no ve müşteri no'ları nizamimi ve daha önceden kullanılmış mı diye kontrol ederken kullanılan değişkenler.
+						int u = 0, olo = 0;  
 						char n;
-						string keepPESEL, tg, yh, th; //dosyada nokuma esnasında ad,soyad ve tcnin karışmaması için kullanılan değişkenler.
+						string keepPESEL, tg, yh, th; 
 						do {
 							ReadFile.open("clientRegistration.txt");
 							u = 0, olo = 0; int p = 0;
@@ -311,7 +303,7 @@ int main() {
 							cin >> cl.PESEL;
 							keepPESEL = cl.PESEL;
 							while (ReadFile >> tg >> th >> cl.PESEL >> yh) {
-								if (keepPESEL == cl.PESEL)          //eğer tckn sistemde kayıtlıysa olo değişkenine 1 atar.
+								if (keepPESEL == cl.PESEL)      
 									olo = 1;
 							}
 							ReadFile.close();
@@ -319,31 +311,31 @@ int main() {
 							for (int i = 0; i < (keepPESEL.length()); i++) {
 								n = keepPESEL[i];
 								p = static_cast<int>(n);
-								if (!(p > 47 && p < 58))						//eğer tckn de rakamdan farklı bir karakter kulllanılmışsa u değişkenine 1 atar.
+								if (!(p > 47 && p < 58))						
 									u = 1;
 							}
 							if (u == 1) {
 								system("cls");
-								cout << "PESEL NUMBER MUST BE NUMBERS ONLY...\n";			//u değişkenine 1 atanmışsa uyarı verir.
+								cout << "PESEL NUMBER MUST BE NUMBERS ONLY...\n";			
 								system("pause");
 								system("cls");
 							}
 							else if (keepPESEL.length() != 11) {
 								system("cls");
-								cout << "PESEL MUST BE 11 DIGITS...\n";					//tckn 11 haneli değilse uyarı verir.
+								cout << "PESEL MUST BE 11 DIGITS...\n";					
 								system("pause");
 								system("cls");
 							}
 
 							else if (olo == 1) {
 								system("cls");
-								cout << "THIS PESEL IS ALREADY REGISTERED. ENTER ANOTHER PESEL...\n";			//olo değikenine 1 atanmışsa uyarı verir.
+								cout << "THIS PESEL IS ALREADY REGISTERED. ENTER ANOTHER PESEL...\n";			
 								system("pause");
 								system("cls");
 							}
-						} while (u == 1 || keepPESEL.length() != 11 || olo == 1); //eğer uyarılardan biri bile olduysa tckn nin yeniden girilmesini ister.
+						} while (u == 1 || keepPESEL.length() != 11 || olo == 1); 
 
-						int tutucu, tutucu2;   //musteri numarası daha önceden alınmış mı ve nizami mi diye kontrol edilirken kullanılan değişkenler.
+						int tutucu, tutucu2;   
 						string clno;
 						do {
 							tutucu = 0, tutucu2 = 0;
@@ -353,7 +345,7 @@ int main() {
 							ReadFile.open("clientRegistration.txt");
 							while (ReadFile >> tg >> th >> cl.PESEL >> cl.clientNumber) {
 								if (clno == cl.clientNumber)
-									tutucu = 1;                              // müşteri numarası daha önceden kayıtlanmışsa tutucu değişkenine 1 atar.
+									tutucu = 1;                              
 							}
 							char u;
 							int y;
@@ -361,7 +353,7 @@ int main() {
 							for (int i = 0; i < clno.length(); i++) {
 								u = clno[i];
 								y = static_cast<int>(u);
-								if (!(y > 47 && 58 > y))					//eğer müşteri numarasında rakamdan farklı bir karakter varsa tutucu2 değişkenine 1 atar.
+								if (!(y > 47 && 58 > y))					
 									tutucu2 = 1;
 							}
 							if (tutucu == 1) {
@@ -376,13 +368,13 @@ int main() {
 								system("pause");
 								system("cls");
 							}
-							else if (clno.length() != 5) {						//müşeri numarası 5 haneden farklı ise uyarı verir.
+							else if (clno.length() != 5) {						
 								system("cls");
 								cout << "CLIENT NUMBER MUST HAVE 5 DIGITS...\n";
 								system("pause");
 								system("cls");
 							}
-						} while (tutucu == 1 || tutucu2 == 1 || clno.length() != 5);  //uyarılardan biri bile verildiyse yeninen numara girmenizi ister.
+						} while (tutucu == 1 || tutucu2 == 1 || clno.length() != 5);  
 
 						WriteFile.open("clientRegistration.txt", ios::app);
 						WriteFile << cl.name << "\t" << cl.surname << "\t" << keepPESEL << "\t" << clno << endl;
@@ -404,14 +396,13 @@ int main() {
 					} while (control == "y");
 
 				}
-				//-----------------------------2 nin icindeki 2 giris-------------------
 				else if (choiceFIRST == "2") {
 
 					string choice1;
-					string no;  //müşteri numarası sistemde varmı diye kontrol eden değişken.
+					string no;  
 
 					do {
-						int g = 0;      //silinmesi için girilen numaranın var olup olmadığını anlamak için kullanılan değişken.
+						int g = 0;      
 						do {
 							g = 0;
 							system("cls");
@@ -431,7 +422,7 @@ int main() {
 								system("cls");
 							}
 						} while (g == 0);
-						//-----------------------------------------
+					
 						WriteFile.open("rezervKeep.txt");
 						ReadFile.open("rezerv.txt");
 						while (ReadFile >> ROOM.roomNo >> cl.clientNumber >> cl.name) {
@@ -483,7 +474,6 @@ int main() {
 						} while (choice1 != "y"&&choice1 != "n");
 					} while (choice1 == "y");
 				}
-				//-------------------2 nin icindeki 3 giris--------------------------------
 				else if (choiceFIRST == "3") {
 					system("cls");
 					cout << "CLIENT NAME" << "\t" << "CLIENT SURNAME" << "\t" << "CLIENT PESEL" << "\t" << "CLIENT NUMBER\n";
@@ -518,11 +508,8 @@ int main() {
 			} while (choiceFIRST != "99");
 
 		}
-		//------------------------------------------------------------------------ANA_MENU_2.SECENEK_CIKIS-------------------------------------
-
-		//------------------------------------------------------------------------ANA_MENU_3.SECENEK_GIRIS-------------------------------------
 		if (choice == "3") {
-			string choiceFIRST;   //menü seçimlerinde kullanılan değişken.
+			string choiceFIRST;  
 			do {
 				system("cls");
 				cout << "ROOM REGISTRATION PROCEDURES\n";
@@ -536,12 +523,12 @@ int main() {
 				cout << "YOUR CHOICE: ";
 				cin >> choiceFIRST;
 
-				//------------------------3 icindeki 1 giris-----------------------------------------------------------
+				
 
 				if (choiceFIRST == "1") {
-					int  b = 0, d = 0, t = 0, y, o = 0;   //oda daha önce tutulmuşsa veya böyle bir oda yoksa bu bilgileri saklamak için kullanılan değişkenler.
-					string q;  //yeni rezeervasyon yapılıp yapılmayacağını tutan değişken.
-					string namekeep, a, tutt, c;    //odanın daha öne tutulup tutulmadığını ve böyle bir odanın olup olmadığını kontrol ederken kullanılan değiken.
+					int  b = 0, d = 0, t = 0, y, o = 0;   
+					string q;  
+					string namekeep, a, tutt, c;    
 
 					do {
 						system("cls");
@@ -580,21 +567,21 @@ int main() {
 
 						} while (b == 0 || o == 1);
 						do {
-							d = 0;        // girilen numaranın rezervasyonu daha önceden yapılmış mı ve girilen numara sistemde kayıtlı mı diye kontrol eden değişkenler.
+							d = 0;        
 							t = 0;
 							cout << "NUMBER OF THE CLIENT TO BE PLACED IN THE ROOM: ";
 							cin >> c;
 							ReadFile.open("rezerv.txt");
 							while (ReadFile >> ROOM.roomNo >> cl.clientNumber >> cl.name)
 							{
-								if (c == cl.clientNumber)				//numaranın daha önceden rezervasyonu yapılmışsa t değişkenine 1 atar.
+								if (c == cl.clientNumber)			
 									t = 1;
 
 							}
 							ReadFile.close();
 							ReadFile.open("clientRegistration.txt");
 							while (ReadFile >> cl.name >> cl.surname >> cl.PESEL >> cl.clientNumber) {
-								if (c == cl.clientNumber) {							//müşteri numarası sistemde kayıtlıysa d değişkenine 1 atar.
+								if (c == cl.clientNumber) {							
 									d = 1;
 									namekeep = cl.name;
 								}
@@ -613,7 +600,7 @@ int main() {
 								system("pause");
 								system("cls");
 							}
-							else if (t == 1)   // t değişkenine 1 atanmışsa uyarı verir.
+							else if (t == 1)   
 							{
 								system("cls");
 								cout << "THE NUMBER YOU ENTERED IS RESERVED...\n";
@@ -621,7 +608,7 @@ int main() {
 								system("cls");
 							}
 
-						} while (d == 0 || t == 1);   //t değişkenine 1 atanmışsa veya d değişkeni 0 sa yeniden numara girilmesini ister.
+						} while (d == 0 || t == 1);   
 						WriteFile.open("rezerv.txt", ios::app);
 						WriteFile << tutt << "\t" << cl.clientNumber << "\t" << cl.name << endl;
 						WriteFile.close();
@@ -638,15 +625,13 @@ int main() {
 
 
 
-					} while (q == "y");//oda kayit devam
+					} while (q == "y");
 				}
 
-				//------------------------3 icindeki 2 giris-------------------------------------------------
-
 				if (choiceFIRST == "2") {
-					int lol;		//numara var mı yok mu diye kontrol edilirken kullanılan değişken.
+					int lol;		
 					string choice1;
-					string no;  //silinecek nmaranın rezervasyonu var mı diye kontrol etmek için kullanılan değişken.
+					string no; 
 					do {
 						do {
 							lol = 0;
@@ -656,16 +641,16 @@ int main() {
 							ReadFile.open("rezerv.txt");
 							while (ReadFile >> ROOM.roomNo >> cl.clientNumber >> cl.name)
 							{
-								if (no == cl.clientNumber)                        //numaranın rezervasyonu varsa lol değişkenine 1 atanır.
+								if (no == cl.clientNumber)                        
 									lol = 1;
 							}
 							ReadFile.close();
-							if (lol == 0) {									//eğer lol değişkeni sıfırsa yani bu numaranın rezervasyonu yoksa uyarı verir.
+							if (lol == 0) {									
 								system("cls");
 								cout << "THIS NUMBER DOES NOT HAVE A RESERVATION.\n";
 								system("pause");
 							}
-						} while (lol == 0);  // lol değişkeni sıfırsa yeniden numara ister.
+						} while (lol == 0);
 
 						WriteFile.open("rezervKeep.txt");
 						ReadFile.open("rezerv.txt");
@@ -702,12 +687,10 @@ int main() {
 
 				}
 
-				//------------------------------------3 ic 2 cıkıs-----------------------------------------------
-
 				if (choiceFIRST == "3") {
 					system("cls");
 					ReadFile.open("rezerv.txt");
-					cout << setw(15) << "                        --------------------------REZERVASYONLAR--------------------------\n";
+					cout << setw(15) << "                        --------------------------RESERVATIONS--------------------------\n";
 					cout << "ROOM NUMBER" << "\t" << "CLIENT NUMBER" << "\t" << "CLIENT NAME" << endl;
 					for (int i = 0; i < 40; i++) {
 						cout << "_";
@@ -721,7 +704,6 @@ int main() {
 					while (ReadFile >> ROOM.roomNo >> cl.clientNumber >> cl.name) {
 
 
-
 						cout << left << setw(16) << ROOM.roomNo << left << setw(24) << cl.clientNumber << cl.name << endl;
 
 
@@ -731,9 +713,6 @@ int main() {
 					system("pause");
 
 				}
-				//-----------------------------------3 ic 3  cıkıs-----------------------------------------------
-
-
 
 
 				if (choiceFIRST != "1" && choiceFIRST != "2" && choiceFIRST != "3" && choiceFIRST != "99") {
@@ -741,8 +720,6 @@ int main() {
 					cout << "INCORRECT CHOICE.\n";
 					system("pause");
 				}
-
-
 
 
 			} while (choiceFIRST != "99");
