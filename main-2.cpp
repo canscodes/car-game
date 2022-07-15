@@ -18,7 +18,7 @@ int main() {
 	ifstream ReadFile;
 	client cl;
 	room ROOM;
-	string choice;		//Menü seçimlerinde kullanılan değişken.
+	string choice;		
 	do {
 		system("cls");
 		cout << "HOTEL PROCEDURES\n";
@@ -32,9 +32,9 @@ int main() {
 		cout << "YOUR CHOICE: ";
 		cin >> choice;
 
-		//------------------------------------------------------ANA_MENU_1.SECENEK_GIRIS-----------------------------------------------
+		
 		if (choice == "1") {
-			string choiceFIRST;		//Menü seçimlerinde kullanılan değişken.
+			string choiceFIRST;		
 			do {
 				system("cls");
 				cout << "ROOM PROCEDURES\n";
